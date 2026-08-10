@@ -1,4 +1,4 @@
-# 박태정 포트폴리오
+# 포트폴리오
 
 **https://taejeong0416.github.io**
 
