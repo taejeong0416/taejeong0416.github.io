@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+.vscode/
+node_modules/
+
+# 내부 작업 문서 (공개 X) — HTML만 공개
+# (master.md는 ../profile/ 로 이동. 이력서 원본 md는 여기서 비공개)
+cv_general.md
+cv_*.md
+
+# 내부 편집 지침 (공개 X)
+README.md

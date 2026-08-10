@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박태정 · 포트폴리오</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root {
+  --ink:      #1c1e21;
+  --ink-mid:  #55595f;
+  --ink-soft: #85898f;
+  --line:     #e6e7e9;
+  --line-mid: #d2d4d7;
+  --accent:   #2f4f7a;
+  --side-bg:  #101c33;
+  --side-ink: rgba(255, 255, 255, 0.92);
+  --side-dim: rgba(255, 255, 255, 0.55);
+  --nav-w:    224px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', -apple-system, sans-serif;
+  background: #fff;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 제목은 줄 길이를 고르게, 본문은 마지막 줄에 한 단어만 남지 않게 */
+.ttl, .track h3 { text-wrap: balance; }
+.sub, .desc, .role-note, .track dd { text-wrap: pretty; }
+a { color: inherit; text-decoration: none; }
+
+/* ===== 좌측 목차 ===== */
+.side {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  padding: 3.4rem 0 2.2rem 2.6rem;
+  background: var(--side-bg);
+  color: var(--side-ink);
+  display: flex;
+  flex-direction: column;
+}
+.side .photo {
+  display: block;
+  width: 98px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  margin-bottom: 1.1rem;
+}
+.side .name {
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.side .name-en {
+  font-size: 0.84rem;
+  color: var(--side-dim);
+  letter-spacing: 0.02em;
+  margin-top: 0.15rem;
+}
+.side .role {
+  font-size: 0.84rem;
+  color: var(--side-dim);
+  margin-top: 0.9rem;
+  line-height: 1.6;
+}
+
+.toc { margin-top: 2.6rem; display: flex; flex-direction: column; gap: 0.1rem; }
+.toc a {
+  font-size: 0.92rem;
+  color: var(--side-dim);
+  padding: 0.34rem 0;
+  border-left: 1px solid transparent;
+  padding-left: 0.85rem;
+  margin-left: -0.85rem;
+  transition: color .18s, border-color .18s;
+}
+.toc a:hover { color: #fff; }
+.toc a.on { color: #fff; border-left-color: #fff; font-weight: 500; }
+
+/* ===== 본문 ===== */
+main {
+  margin-left: var(--nav-w);
+  padding: 3.4rem 3rem 7rem 3.6rem;
+  max-width: 760px;
+}
+
+section { padding-bottom: 3.4rem; }
+section + section { padding-top: 0.4rem; }
+
+.sec-title {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line-mid);
+  margin-bottom: 1.7rem;
+}
+
+/* 항목 공통 */
+.row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 1.4rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.row:last-of-type { border-bottom: none; }
+.when {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.16rem;
+  white-space: nowrap;
+}
+.ttl { font-size: 0.94rem; font-weight: 600; }
+.sub { font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.15rem; }
+.desc { font-size: 0.86rem; color: var(--ink-mid); margin-top: 0.55rem; }
+.rank { color: var(--accent); font-weight: 600; }
+#awards .rank { margin-left: 0.4rem; }
+
+/* 프로젝트 */
+.proj { padding: 1.5rem 0; }
+.proj .role-note {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  margin-top: 0.6rem;
+}
+.proj .role-note b { color: var(--ink-mid); font-weight: 500; }
+.stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+.stack span {
+  font-size: 0.72rem;
+  color: var(--ink-mid);
+  border: 1px solid var(--line-mid);
+  border-radius: 2px;
+  padding: 0.1rem 0.5rem;
+}
+
+/* 역량 2트랙 */
+.tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6rem; }
+.track h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line-mid);
+}
+.track dl { margin-top: 1rem; }
+.track dt { font-size: 0.76rem; color: var(--ink-soft); margin-top: 0.9rem; }
+.track dt:first-child { margin-top: 0; }
+.track dd { font-size: 0.85rem; color: var(--ink); margin-top: 0.15rem; }
+
+
+/* 연락처 */
+.contact { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; }
+.contact div { display: grid; grid-template-columns: 78px 1fr; gap: 1rem; }
+.contact .k { font-size: 0.78rem; color: var(--ink-soft); padding-top: 0.1rem; }
+.contact a, .copy { border-bottom: 1px solid var(--line-mid); }
+.contact a:hover, .copy:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.copy { cursor: pointer; }
+.copied {
+  margin-left: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.copied.on { opacity: 1; }
+
+/* ===== 반응형 ===== */
+@media (max-width: 820px) {
+  .side {
+    position: static;
+    width: auto;
+    padding: 2.4rem 1.6rem 1.4rem;
+  }
+  .toc { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1.1rem; margin-top: 1.4rem; }
+  .toc a { border-left: none; padding-left: 0; margin-left: 0; }
+  .toc a.on { border-left: none; }
+  main { margin-left: 0; padding: 2.4rem 1.6rem 4rem; }
+  .tracks { grid-template-columns: 1fr; gap: 2rem; }
+  .row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .when { padding-top: 0; }
+}
+
+/* ===== 인쇄 ===== */
+@page { margin: 14mm 13mm; }
+
+@media print {
+  body { font-size: 10pt; line-height: 1.62; }
+
+  .side {
+    position: static; width: auto;
+    padding: 0 0 0.9rem;
+    background: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-mid);
+  }
+  .side .photo { width: 76px; margin-bottom: 0.7rem; border-color: var(--line-mid); }
+  .side .name-en, .side .role { color: var(--ink-soft); }
+  .side .role { margin-top: 0.4rem; }
+  .toc, .copied { display: none; }
+
+  main { margin-left: 0; padding: 1.2rem 0 0; max-width: none; }
+
+  section { padding-bottom: 1.5rem; }
+  section + section { padding-top: 0; }
+  .sec-title { margin-bottom: 1.1rem; break-after: avoid; }
+  .row, .proj, .track, .contact div { break-inside: avoid; }
+  .desc, .sub { orphans: 2; widows: 2; }
+
+  a, .copy { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<aside class="side">
+  <img class="photo" src="assets/profile.jpg" alt="박태정 프로필 사진">
+  <p class="name">박태정</p>
+  <p class="name-en">Park Taejeong</p>
+  <p class="role">AI · 머신러닝<br>서비스 개발</p>
+
+  <nav class="toc">
+    <a href="#education">학력</a>
+    <a href="#awards">수상</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#activities">활동</a>
+    <a href="#skills">역량</a>
+    <a href="#certs">자격증 · 시험</a>
+    <a href="#contact">연락처</a>
+  </nav>
+
+</aside>
+
+<main>
+
+<!-- ========== 학력 ========== -->
+<section id="education">
+  <h2 class="sec-title">학력</h2>
+
+  <div class="row">
+    <span class="when">2024.03~</span>
+    <div>
+      <p class="ttl">부산대학교 정보컴퓨터공학부 인공지능전공</p>
+      <p class="sub">3학년 재학 · GPA 3.70 / 4.50 (전공 3.69)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 수상 ========== -->
+<section id="awards">
+  <h2 class="sec-title">수상</h2>
+
+  <div class="row">
+    <span class="when">2026.07</span>
+    <div>
+      <p class="ttl">DIVE 2026 글로벌 데이터 해커톤 <span class="rank">발제사상 · 2위</span></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2026.05</span>
+    <div>
+      <p class="ttl">하나 소셜벤처 아이디어 경진대회 <span class="rank">최우수상 · 1위</span></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2026.03</span>
+    <div>
+      <p class="ttl">미래도서관 정책 아이디어 해커톤 <span class="rank">최우수상 · 1위</span></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2025.12</span>
+    <div>
+      <p class="ttl">CJ 리모트인턴십 덱스톤 <span class="rank">최우수상 · 1위</span></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2025.11</span>
+    <div>
+      <p class="ttl">지산학 산업수학 데이터분석 경진대회 <span class="rank">최우수상 · 2위</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 프로젝트 ========== -->
+<section id="projects">
+  <h2 class="sec-title">프로젝트</h2>
+
+  <div class="row proj">
+    <span class="when">2026.07</span>
+    <div>
+      <p class="ttl">Be:live — 취향 기반 공공임대주택 추천 서비스</p>
+      <p class="sub">DIVE 2026 글로벌 데이터 해커톤 · 부산도시공사 × 선도소프트 · <span class="rank">발제사상 · 2위</span></p>
+      <p class="desc">공공임대 당첨자 절반이 입주를 포기하는 문제를 정량 조건이 아닌 생활취향 기반 추천으로 접근. 취향은 직접 묻지 않고 가상 매물 A/B 비교에서 학습해 우선순위와 포기 지점을 파악.</p>
+      <p class="role-note"><b>4인 팀</b> · 서비스 구현 담당 · 취향 학습 모델 설계 참여</p>
+      <div class="stack">
+        <span>React · Vite</span><span>NestJS</span><span>PostGIS</span><span>Prisma</span><span>Gemini API</span><span>Naver Maps</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.06~08</span>
+    <div>
+      <p class="ttl">LLM 에이전트 스킬 제작</p>
+      <p class="sub">개인 프로젝트 · 일부 오픈소스 공개(MIT)</p>
+      <p class="desc">브레인스토밍 — 확산 모델과 GAN 구조를 차용한 아이디어 발산·검증. 오픈소스로 공개.<br>배포 노출면 점검 — 배포한 사이트에서 밖으로 보이는 것을 여덟 축으로 대조해 정리.<br>공모전 요강 분석 — 대회별 작업 지침 문서 생성.</p>
+      <p class="role-note"><b>개인 프로젝트</b> · 규격 설계 · 스크립트 구현 · 문서화</p>
+      <div class="stack">
+        <span>Claude Skill</span><span>Python</span><span>에이전트 설계</span><span>오픈소스</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.05</span>
+    <div>
+      <p class="ttl">열 원격검침 이상탐지</p>
+      <p class="sub">2026 기후부 AX 아이디어 경진대회 · 한국지역난방공사 데이터</p>
+      <p class="desc">라벨이 없는 시계열 검침 데이터에서 이상 구간을 찾는 비지도 이상탐지. GMM · IsolationForest · Autoencoder를 앙상블해 단일 모델의 오탐 편향을 상쇄.</p>
+      <p class="role-note"><b>2인 팀</b> · 모델 설계 · 앙상블 구성 · 검증</p>
+      <div class="stack">
+        <span>Python</span><span>scikit-learn</span><span>GMM</span><span>IsolationForest</span><span>Autoencoder</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.04~</span>
+    <div>
+      <p class="ttl">팜피(FarmFi) — 도심 공실 스마트팜 플랫폼</p>
+      <p class="sub">창업동아리 · 하나 소셜벤처 아이디어 경진대회 · <span class="rank">최우수상 · 1위</span></p>
+      <p class="desc">도심 공실 상가를 스마트팜 매장으로 전환하고 그 운영을 대행하는 인프라. 투자금을 에스크로에 묶어두고, 영수증 OCR · 현장사진 Vision · IoT 이상탐지가 모두 통과할 때만 스마트컨트랙트가 다음 자금을 집행하도록 설계해 기존 STO의 자금 통제 공백을 메움.</p>
+      <p class="role-note"><b>4인 팀</b> · 백엔드 · AI 검증 파이프라인 · 스마트컨트랙트 연계</p>
+      <div class="stack">
+        <span>Next.js · TS</span><span>Prisma</span><span>Supabase</span><span>Solidity · Foundry</span><span>OCR · Vision</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.04~05</span>
+    <div>
+      <p class="ttl">문서 AI RAG MVP</p>
+      <p class="sub">오달 미래내일 일경험 · 언커먼랩</p>
+      <p class="desc">도메인 특화 AI 후보군을 벤치마킹해 OCR · sLLM 스택을 선정하고, 문서를 올리면 OCR로 읽어 분류한 뒤 질의응답까지 이어지는 RAG 서비스를 개발. 임베딩 · 벡터 검색 파이프라인 설계와 결과 검증을 담당.</p>
+      <p class="role-note"><b>4인 팀</b> · 모델 리서치 · 벤치마킹 · 백엔드 파이프라인 설계</p>
+      <div class="stack">
+        <span>FastAPI</span><span>Qdrant</span><span>임베딩</span><span>OCR</span><span>sLLM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.03~04</span>
+    <div>
+      <p class="ttl">납본 보상 바우처화 — 출판 생태계 순환 설계</p>
+      <p class="sub">미래도서관 정책 아이디어 해커톤 · <span class="rank">최우수상 · 1위</span></p>
+      <p class="desc">생성형 AI 대량출판으로 흔들리는 납본제도에 대해, AI 판별이나 창작성 심사 없이 보상 방식만 재설계하는 안을 제시. 납본 보상금을 현금에서 출판 생태계 전용 바우처로 전환해 대량출판의 경제적 유인을 조정하고, 가맹 체계와 3단계 시행안까지 설계.</p>
+      <p class="role-note"><b>2인 팀</b> · 문제 정의 · 제도 설계 · 제안서 작성 (공동)</p>
+      <div class="stack">
+        <span>정책 설계</span><span>제도 분석</span><span>생성형 AI 이슈</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2026.01~02</span>
+    <div>
+      <p class="ttl">ETF 공동보유 네트워크와 유동성 왜곡</p>
+      <p class="sub">DB보험금융 공모전 · 계량금융 실증 연구</p>
+      <p class="desc">서로 같은 종목을 담은 ETF가 많을수록 시장 충격 때 가격이 순자산가치에서 더 벌어지는지 검증. 월별 구성종목 비중으로 공동보유 네트워크 밀집도를 지표화하고, ETF · 일자 이중 고정효과 패널 회귀와 이벤트 스터디로 추정.</p>
+      <p class="role-note"><b>2인 팀</b> · 데이터 구축 · 모형 설계 · 집필 (공동)</p>
+      <div class="stack">
+        <span>Python</span><span>이중 고정효과</span><span>이벤트 스터디</span><span>Clustered SE</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row proj">
+    <span class="when">2025.11</span>
+    <div>
+      <p class="ttl">부산 미분양 원인 분석</p>
+      <p class="sub">지산학 산업수학 데이터분석 경진대회 · <span class="rank">최우수상 · 2위</span></p>
+      <p class="desc">부산 지역 미분양의 원인 구조를 패널 이중 고정효과와 분위수 회귀로 추정. 단위근·Hausman 검정으로 모형 선택 근거를 확보하고, 분위수별로 원인이 달라지는 구간을 해석.</p>
+      <p class="role-note"><b>4인 팀</b> · 분석 설계 · 모형 선택 · 결과 해석</p>
+      <div class="stack">
+        <span>Python</span><span>패널 FE</span><span>분위수 회귀</span><span>단위근 · Hausman</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 활동 ========== -->
+<section id="activities">
+  <h2 class="sec-title">활동</h2>
+
+  <div class="row">
+    <span class="when">2026.06~07</span>
+    <div>
+      <p class="ttl">하나 소셜벤처 유니버시티</p>
+      <p class="sub">팜피(FarmFi) 아이템으로 참가<br>8주간 창업 심화 과정 수료, 페르소나 분석 · 시장 분석 · 수익모델 설계</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2026.03~06</span>
+    <div>
+      <p class="ttl">키퍼 · 정보보안 동아리</p>
+      <p class="sub">정기 세미나 및 CS · 웹 · 보안을 넓게 다루는 스터디 활동</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2025.08~</span>
+    <div>
+      <p class="ttl">IBA · 데이터분석 동아리</p>
+      <p class="sub">데이터분석 · 머신러닝 교육 이수, ML 프로젝트 2건 수행 (신용위험 분류 · 중고차 가격 회귀)<br>학술부 운영진으로 신입 교육 · 내부 대회 운영 담당, AI 논문 스터디 팀장<br>동아리 디스코드 채널 개설, GitHub 트렌딩 일일 브리핑 봇 제작 · 운영</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2025.04~12</span>
+    <div>
+      <p class="ttl">CJ 리모트인턴십 (대외활동)</p>
+      <p class="sub">데이터분석 · 기획 특강 수강 후 세션2 진출, 지역문제 팀 프로젝트로 부산 악취 원인 분석<br>과정 내 덱스톤에서 올리브영 매출 · 프로모션 데이터로 권역별 주력 상품군 차이 확인, 전국 단일 프로모션의 한계를 지적하고 다중회귀로 권역별 매출 요인 검증</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <span class="when">2024.03~08</span>
+    <div>
+      <p class="ttl">코드코치 · 코딩 교육봉사 동아리</p>
+      <p class="sub">대학생 멘토로 초 · 중학생 대상 마이크로비트 블록코딩 교육 진행</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ========== 역량 ========== -->
+<section id="skills">
+  <h2 class="sec-title">역량</h2>
+
+  <div class="tracks">
+    <div class="track">
+      <h3>개발 · AI 응용</h3>
+      <dl>
+        <dt>언어</dt>
+        <dd>Python, TypeScript, C, C++, Java</dd>
+        <dt>백엔드</dt>
+        <dd>FastAPI, NestJS, Prisma, PostgreSQL</dd>
+        <dt>프론트 · 배포</dt>
+        <dd>React, Next.js, Docker, GitHub Actions</dd>
+        <dt>AI 응용</dt>
+        <dd>RAG, OCR, 임베딩, 벡터DB, LLM API</dd>
+      </dl>
+    </div>
+
+    <div class="track">
+      <h3>데이터 · 분석</h3>
+      <dl>
+        <dt>계량 · 통계</dt>
+        <dd>다중회귀분석, 분위수 회귀분석, 패널 고정효과 모형, 이벤트 스터디</dd>
+        <dt>머신러닝</dt>
+        <dd>비지도 이상탐지, 추천 · 취향학습, 분류 · 회귀</dd>
+        <dt>분석 도구</dt>
+        <dd>pandas, scikit-learn, PyTorch, PostGIS</dd>
+      </dl>
+    </div>
+  </div>
+
+</section>
+
+<!-- ========== 자격증 · 시험 ========== -->
+<section id="certs">
+  <h2 class="sec-title">자격증 · 시험</h2>
+
+  <div class="row">
+    <span class="when">2026.05</span>
+    <div>
+      <p class="ttl">PCCP <span class="rank">Lv.3 · 622점</span></p>
+      <p class="sub">프로그래머스 코딩 전문 역량 인증 시험 · C++</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 연락처 ========== -->
+<section id="contact">
+  <h2 class="sec-title">연락처</h2>
+  <div class="contact">
+    <div><span class="k">Email</span><span><span class="copy" data-copy="tj041600@naver.com" title="클릭하면 복사">tj041600@naver.com</span><span class="copied">복사됨</span></span></div>
+    <div><span class="k">GitHub</span><span><a href="https://github.com/taejeong0416" target="_blank" rel="noopener">github.com/taejeong0416</a></span></div>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.querySelectorAll('.copy').forEach(el => {
+  el.addEventListener('click', async () => {
+    const text = el.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const t = document.createElement('textarea');
+      t.value = text;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      t.remove();
+    }
+    const tag = el.nextElementSibling;
+    tag.classList.add('on');
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => tag.classList.remove('on'), 1400);
+  });
+});
+
+const links = document.querySelectorAll('.toc a');
+links.forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(a.getAttribute('href').slice(1))
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+const map = new Map([...links].map(a => [a.getAttribute('href').slice(1), a]));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(a => a.classList.remove('on'));
+      map.get(e.target.id)?.classList.add('on');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+document.querySelectorAll('main section').forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>
