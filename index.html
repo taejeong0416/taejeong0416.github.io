@@ -150,6 +150,102 @@ section + section { padding-top: 0.4rem; }
   margin-top: 0.6rem;
 }
 .proj .role-note b { color: var(--ink-mid); font-weight: 500; }
+/* 제출물 캡처 캐러셀 — 본문 폭 밖 여백에 띄운다 */
+.proj.with-shots { position: relative; }
+.shots {
+  position: absolute;
+  top: 1.5rem;
+  left: calc(100% + 2.4rem);
+  width: 264px;
+}
+.shots .stage { position: relative; }
+.shots .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.shots .stage:hover .arrow, .shots .arrow:focus-visible { opacity: 1; }
+.shots .frame:not(:has(img + img)) ~ .arrow { display: none; }
+.shots .arrow.prev { left: 0.4rem; }
+.shots .arrow.next { right: 0.4rem; }
+.shots .frame {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 0.4rem;
+  scrollbar-width: none;
+}
+.shots .frame::-webkit-scrollbar { display: none; }
+.shots .frame img {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: center;
+  border: 1px solid var(--line-mid);
+  border-radius: 2px;
+  cursor: zoom-in;
+}
+.shots .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.45rem;
+}
+.shots .dots { display: flex; gap: 0.3rem; }
+.shots .dots button {
+  width: 6px; height: 6px; padding: 0;
+  border: none; border-radius: 50%;
+  background: var(--line-mid);
+  cursor: pointer;
+}
+.shots .dots button[aria-current="true"] { background: var(--ink-soft); }
+.shots .cap { font-size: 0.7rem; color: var(--ink-soft); }
+/* 확대 오버레이 */
+.lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.82);
+  cursor: zoom-out;
+}
+.lightbox[open] { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; }
+.lightbox .lb-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0 0 0.16rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox .lb-arrow:hover { background: rgba(255, 255, 255, 0.3); }
+.lightbox .lb-arrow.prev { left: 1.4rem; }
+.lightbox .lb-arrow.next { right: 1.4rem; }
+.lightbox.single .lb-arrow { display: none; }
 .stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
 .stack span {
   font-size: 0.72rem;
@@ -190,6 +286,16 @@ section + section { padding-top: 0.4rem; }
 .copied.on { opacity: 1; }
 
 /* ===== 반응형 ===== */
+/* 오른쪽 여백이 모자라면 캐러셀을 본문 아래로 내린다 */
+@media screen and (max-width: 1180px) {
+  html:not(.embed) .shots {
+    position: static;
+    width: 100%;
+    max-width: 300px;
+    margin: 0.9rem 0 0 calc(92px + 1.4rem);
+  }
+}
+
 /* iframe 안(html.embed)은 좁아도 데스크톱 화면을 축소해 보여주므로 제외한다 */
 @media screen and (max-width: 820px) {
   html:not(.embed) .side {
@@ -203,6 +309,7 @@ section + section { padding-top: 0.4rem; }
   html:not(.embed) main { margin-left: 0; padding: 2.4rem 1.6rem 4rem; }
   html:not(.embed) .tracks { grid-template-columns: 1fr; gap: 2rem; }
   html:not(.embed) .row { grid-template-columns: 1fr; gap: 0.2rem; }
+  html:not(.embed) .shots { max-width: none; margin-left: 0; }
   html:not(.embed) .when { padding-top: 0; }
 }
 
@@ -232,6 +339,7 @@ section + section { padding-top: 0.4rem; }
   .proj { padding: 1.1rem 0; }
   .track dt { margin-top: 0.6rem; }
   .row, .proj, .track, .contact div { break-inside: avoid; }
+  .shots, .lightbox { display: none; }
   .desc, .sub { orphans: 2; widows: 2; }
 
   .contact a, .copy { border-bottom: none; }
@@ -332,7 +440,7 @@ if (window.self !== window.top) {
 <section id="projects">
   <h2 class="sec-title">프로젝트</h2>
 
-  <div class="row proj">
+  <div class="row proj with-shots">
     <span class="when">2026.07</span>
     <div>
       <p class="ttl">Be:live — 취향 기반 공공임대주택 추천 서비스</p>
@@ -341,6 +449,21 @@ if (window.self !== window.top) {
       <p class="role-note"><b>4인 팀</b> · 서비스 구현 담당 · 취향 학습 모델 설계 참여</p>
       <div class="stack">
         <span>React · Vite</span><span>NestJS</span><span>PostGIS</span><span>Prisma</span><span>Gemini API</span><span>Naver Maps</span>
+      </div>
+    </div>
+    <div class="shots" data-caps="표지|가상 매물 비교로 취향 학습|위치 기반 지도 탐색">
+      <div class="stage">
+        <div class="frame">
+          <img src="assets/report-belive-1.jpg" alt="발표자료 표지" loading="lazy">
+          <img src="assets/report-belive-2.jpg" alt="가상 매물을 비교하게 해 사용자 선호를 파악하는 온보딩" loading="lazy">
+          <img src="assets/report-belive-3.jpg" alt="입력한 위치 주변 공공임대를 취향 적합도와 함께 보여주는 지도 탭" loading="lazy">
+        </div>
+        <button class="arrow prev" type="button" aria-label="이전 장면">‹</button>
+        <button class="arrow next" type="button" aria-label="다음 장면">›</button>
+      </div>
+      <div class="bar">
+        <div class="dots"></div>
+        <span class="cap"></span>
       </div>
     </div>
   </div>
@@ -371,7 +494,7 @@ if (window.self !== window.top) {
     </div>
   </div>
 
-  <div class="row proj">
+  <div class="row proj with-shots">
     <span class="when">2026.04~</span>
     <div>
       <p class="ttl">팜피(FarmFi) — 도심 공실 스마트팜 플랫폼</p>
@@ -380,6 +503,21 @@ if (window.self !== window.top) {
       <p class="role-note"><b>4인 팀</b> · 백엔드 · AI 검증 파이프라인 · 스마트컨트랙트 연계</p>
       <div class="stack">
         <span>Next.js · TS</span><span>Prisma</span><span>Supabase</span><span>Solidity · Foundry</span><span>OCR · Vision</span>
+      </div>
+    </div>
+    <div class="shots" data-caps="표지|공실 전환 운영 흐름|운영자 앱 MVP">
+      <div class="stage">
+        <div class="frame">
+          <img src="assets/report-farmpi-1.jpg" alt="발표자료 표지" loading="lazy">
+          <img src="assets/report-farmpi-2.jpg" alt="정부지원 유치부터 운영 결과 보고까지 대행하는 흐름도" loading="lazy">
+          <img src="assets/report-farmpi-3.jpg" alt="운영자용 앱 MVP — 운영 배정과 생육 모니터링 화면" loading="lazy">
+        </div>
+        <button class="arrow prev" type="button" aria-label="이전 장면">‹</button>
+        <button class="arrow next" type="button" aria-label="다음 장면">›</button>
+      </div>
+      <div class="bar">
+        <div class="dots"></div>
+        <span class="cap"></span>
       </div>
     </div>
   </div>
@@ -397,7 +535,7 @@ if (window.self !== window.top) {
     </div>
   </div>
 
-  <div class="row proj">
+  <div class="row proj with-shots">
     <span class="when">2026.03~04</span>
     <div>
       <p class="ttl">납본 보상 바우처화 — 출판 생태계 순환 설계</p>
@@ -406,6 +544,21 @@ if (window.self !== window.top) {
       <p class="role-note"><b>2인 팀</b> · 문제 정의 · 제도 설계 · 제안서 작성 (공동)</p>
       <div class="stack">
         <span>정책 설계</span><span>제도 분석</span><span>생성형 AI 이슈</span>
+      </div>
+    </div>
+    <div class="shots" data-caps="표지|핵심 제안|바우처 운용 흐름">
+      <div class="stage">
+        <div class="frame">
+          <img src="assets/report-nabbon-1.jpg" alt="제안서 표지" loading="lazy">
+          <img src="assets/report-nabbon-2.jpg" alt="납본 보상을 현금이 아닌 바우처로 제공하자는 핵심 제안" loading="lazy">
+          <img src="assets/report-nabbon-3.jpg" alt="납본 접수부터 국립중앙도서관 정산까지 바우처 운용 흐름" loading="lazy">
+        </div>
+        <button class="arrow prev" type="button" aria-label="이전 장면">‹</button>
+        <button class="arrow next" type="button" aria-label="다음 장면">›</button>
+      </div>
+      <div class="bar">
+        <div class="dots"></div>
+        <span class="cap"></span>
       </div>
     </div>
   </div>
@@ -423,7 +576,7 @@ if (window.self !== window.top) {
     </div>
   </div>
 
-  <div class="row proj">
+  <div class="row proj with-shots">
     <span class="when">2025.11</span>
     <div>
       <p class="ttl">부산 미분양 원인 분석</p>
@@ -432,6 +585,21 @@ if (window.self !== window.top) {
       <p class="role-note"><b>4인 팀</b> · 분석 설계 · 모형 선택 · 결과 해석</p>
       <div class="stack">
         <span>Python</span><span>패널 FE</span><span>분위수 회귀</span><span>단위근 · Hausman</span>
+      </div>
+    </div>
+    <div class="shots" data-caps="표지|FE 회귀모형 설계|구·군별 리스크 수준">
+      <div class="stage">
+        <div class="frame">
+          <img src="assets/report-misbunyang-1.jpg" alt="제출 보고서 표지" loading="lazy">
+          <img src="assets/report-misbunyang-2.jpg" alt="패널 이중 고정효과 회귀모형 설계" loading="lazy">
+          <img src="assets/report-misbunyang-3.jpg" alt="부산시 구·군별 기본 리스크 수준 지도" loading="lazy">
+        </div>
+        <button class="arrow prev" type="button" aria-label="이전 장면">‹</button>
+        <button class="arrow next" type="button" aria-label="다음 장면">›</button>
+      </div>
+      <div class="bar">
+        <div class="dots"></div>
+        <span class="cap"></span>
       </div>
     </div>
   </div>
@@ -543,6 +711,12 @@ if (window.self !== window.top) {
 
 </main>
 
+<div class="lightbox">
+  <button class="lb-arrow prev" type="button" aria-label="이전 장면">‹</button>
+  <img alt="확대 보기">
+  <button class="lb-arrow next" type="button" aria-label="다음 장면">›</button>
+</div>
+
 <script>
 document.querySelectorAll('.copy').forEach(el => {
   el.addEventListener('click', async () => {
@@ -582,6 +756,78 @@ const io = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-20% 0px -70% 0px' });
 document.querySelectorAll('main section').forEach(s => io.observe(s));
+
+const lightbox = document.querySelector('.lightbox');
+const lbImg = lightbox.querySelector('img');
+let lbGroup = null;
+
+const lbShow = i => {
+  const n = (i + lbGroup.imgs.length) % lbGroup.imgs.length;
+  lbGroup.i = n;
+  lbImg.src = lbGroup.imgs[n].src;
+  lbGroup.frame.scrollTo({ left: lbGroup.frame.clientWidth * n });
+};
+const lbClose = () => {
+  lightbox.removeAttribute('open');
+  lbGroup = null;
+};
+
+lightbox.addEventListener('click', lbClose);
+lightbox.querySelectorAll('.lb-arrow').forEach(b => {
+  b.addEventListener('click', e => {
+    e.stopPropagation();
+    lbShow(lbGroup.i + (b.classList.contains('next') ? 1 : -1));
+  });
+});
+addEventListener('keydown', e => {
+  if (!lbGroup) return;
+  if (e.key === 'Escape') lbClose();
+  if (e.key === 'ArrowRight') lbShow(lbGroup.i + 1);
+  if (e.key === 'ArrowLeft') lbShow(lbGroup.i - 1);
+});
+
+document.querySelectorAll('.shots').forEach(shots => {
+  const frame = shots.querySelector('.frame');
+  const imgs = [...frame.querySelectorAll('img')];
+  const caps = shots.dataset.caps.split('|');
+  const dots = shots.querySelector('.dots');
+  const cap = shots.querySelector('.cap');
+
+  imgs.forEach((img, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `${i + 1}번째 장면`);
+    b.addEventListener('click', () => frame.scrollTo({ left: frame.clientWidth * i }));
+    dots.append(b);
+    img.addEventListener('click', () => {
+      lbGroup = { frame, imgs, i };
+      lbImg.src = img.src;
+      lightbox.classList.toggle('single', imgs.length < 2);
+      lightbox.setAttribute('open', '');
+    });
+  });
+
+  if (imgs.length < 2) shots.querySelector('.bar').remove();
+
+  const go = step => {
+    const i = Math.round(frame.scrollLeft / frame.clientWidth);
+    const n = (i + step + imgs.length) % imgs.length;
+    frame.scrollTo({ left: frame.clientWidth * n });
+  };
+  shots.querySelector('.prev').addEventListener('click', () => go(-1));
+  shots.querySelector('.next').addEventListener('click', () => go(1));
+
+  const sync = () => {
+    const i = Math.round(frame.scrollLeft / frame.clientWidth);
+    [...dots.children].forEach((b, n) => b.setAttribute('aria-current', n === i));
+    cap.textContent = `${i + 1} / ${imgs.length} · ${caps[i]}`;
+  };
+  frame.addEventListener('scroll', () => {
+    clearTimeout(frame._t);
+    frame._t = setTimeout(sync, 60);
+  });
+  sync();
+});
 </script>
 
 </body>
