@@ -65,13 +65,11 @@ a { color: inherit; text-decoration: none; }
 }
 .side .name-en {
   font-size: 0.84rem;
-  color: var(--side-dim);
   letter-spacing: 0.02em;
   margin-top: 0.15rem;
 }
 .side .role {
   font-size: 0.84rem;
-  color: var(--side-dim);
   margin-top: 0.9rem;
   line-height: 1.6;
 }
@@ -179,19 +177,20 @@ section + section { padding-top: 0.4rem; }
 .copied.on { opacity: 1; }
 
 /* ===== 반응형 ===== */
+/* iframe 안(html.embed)은 좁아도 데스크톱 화면을 축소해 보여주므로 제외한다 */
 @media screen and (max-width: 820px) {
-  .side {
+  html:not(.embed) .side {
     position: static;
     width: auto;
     padding: 2.4rem 1.6rem 1.4rem;
   }
-  .toc { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1.1rem; margin-top: 1.4rem; }
-  .toc a { border-left: none; padding-left: 0; margin-left: 0; }
-  .toc a.on { border-left: none; }
-  main { margin-left: 0; padding: 2.4rem 1.6rem 4rem; }
-  .tracks { grid-template-columns: 1fr; gap: 2rem; }
-  .row { grid-template-columns: 1fr; gap: 0.2rem; }
-  .when { padding-top: 0; }
+  html:not(.embed) .toc { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1.1rem; margin-top: 1.4rem; }
+  html:not(.embed) .toc a { border-left: none; padding-left: 0; margin-left: 0; }
+  html:not(.embed) .toc a.on { border-left: none; }
+  html:not(.embed) main { margin-left: 0; padding: 2.4rem 1.6rem 4rem; }
+  html:not(.embed) .tracks { grid-template-columns: 1fr; gap: 2rem; }
+  html:not(.embed) .row { grid-template-columns: 1fr; gap: 0.2rem; }
+  html:not(.embed) .when { padding-top: 0; }
 }
 
 /* ===== 인쇄 ===== */
@@ -225,6 +224,21 @@ section + section { padding-top: 0.4rem; }
   .contact a, .copy { border-bottom: none; }
 }
 </style>
+
+<!-- 노션 등 iframe 임베드 — 좁은 폭에서도 모바일 레이아웃으로 접지 않고,
+     데스크톱 화면 그대로 배율만 줄여 넣는다. 그리기 전에 실행돼야 깜빡임이 없다. -->
+<script>
+if (window.self !== window.top) {
+  const root = document.documentElement;
+  root.classList.add('embed');
+  const fit = () => {
+    root.style.zoom = '1';
+    root.style.zoom = String(Math.min(1, root.clientWidth / 1150));
+  };
+  fit();
+  addEventListener('resize', fit);
+}
+</script>
 </head>
 <body>
 
@@ -268,35 +282,35 @@ section + section { padding-top: 0.4rem; }
   <div class="row">
     <span class="when">2026.07</span>
     <div>
-      <p class="ttl">DIVE 2026 글로벌 데이터 해커톤 <span class="rank">발제사상 · 2위</span></p>
+      <p class="ttl">DIVE 2026 글로벌 데이터 해커톤 <span class="rank">발제사상 2위</span></p>
     </div>
   </div>
 
   <div class="row">
     <span class="when">2026.05</span>
     <div>
-      <p class="ttl">하나 소셜벤처 아이디어 경진대회 <span class="rank">최우수상 · 1위</span></p>
+      <p class="ttl">하나 소셜벤처 아이디어 경진대회 <span class="rank">최우수상 1위</span></p>
     </div>
   </div>
 
   <div class="row">
     <span class="when">2026.03</span>
     <div>
-      <p class="ttl">미래도서관 정책 아이디어 해커톤 <span class="rank">최우수상 · 1위</span></p>
+      <p class="ttl">미래도서관 정책 아이디어 해커톤 <span class="rank">최우수상 1위</span></p>
     </div>
   </div>
 
   <div class="row">
     <span class="when">2025.12</span>
     <div>
-      <p class="ttl">CJ 리모트인턴십 덱스톤 <span class="rank">최우수상 · 1위</span></p>
+      <p class="ttl">CJ 리모트인턴십 덱스톤 <span class="rank">최우수상 1위</span></p>
     </div>
   </div>
 
   <div class="row">
     <span class="when">2025.11</span>
     <div>
-      <p class="ttl">지산학 산업수학 데이터분석 경진대회 <span class="rank">최우수상 · 2위</span></p>
+      <p class="ttl">지산학 산업수학 데이터분석 경진대회 <span class="rank">최우수상 2위</span></p>
     </div>
   </div>
 </section>
@@ -309,7 +323,7 @@ section + section { padding-top: 0.4rem; }
     <span class="when">2026.07</span>
     <div>
       <p class="ttl">Be:live — 취향 기반 공공임대주택 추천 서비스</p>
-      <p class="sub">DIVE 2026 글로벌 데이터 해커톤 · 부산도시공사 × 선도소프트 · <span class="rank">발제사상 · 2위</span></p>
+      <p class="sub">DIVE 2026 글로벌 데이터 해커톤 · 부산도시공사 × 선도소프트 · <span class="rank">발제사상 2위</span></p>
       <p class="desc">공공임대 당첨자 절반이 입주를 포기하는 문제를 정량 조건이 아닌 생활취향 기반 추천으로 접근. 취향은 직접 묻지 않고 가상 매물 A/B 비교에서 학습해 우선순위와 포기 지점을 파악.</p>
       <p class="role-note"><b>4인 팀</b> · 서비스 구현 담당 · 취향 학습 모델 설계 참여</p>
       <div class="stack">
@@ -348,7 +362,7 @@ section + section { padding-top: 0.4rem; }
     <span class="when">2026.04~</span>
     <div>
       <p class="ttl">팜피(FarmFi) — 도심 공실 스마트팜 플랫폼</p>
-      <p class="sub">창업동아리 · 하나 소셜벤처 아이디어 경진대회 · <span class="rank">최우수상 · 1위</span></p>
+      <p class="sub">창업동아리 · 하나 소셜벤처 아이디어 경진대회 · <span class="rank">최우수상 1위</span></p>
       <p class="desc">도심 공실 상가를 스마트팜 매장으로 전환하고 그 운영을 대행하는 인프라. 투자금을 에스크로에 묶어두고, 영수증 OCR · 현장사진 Vision · IoT 이상탐지가 모두 통과할 때만 스마트컨트랙트가 다음 자금을 집행하도록 설계해 기존 STO의 자금 통제 공백을 메움.</p>
       <p class="role-note"><b>4인 팀</b> · 백엔드 · AI 검증 파이프라인 · 스마트컨트랙트 연계</p>
       <div class="stack">
@@ -374,7 +388,7 @@ section + section { padding-top: 0.4rem; }
     <span class="when">2026.03~04</span>
     <div>
       <p class="ttl">납본 보상 바우처화 — 출판 생태계 순환 설계</p>
-      <p class="sub">미래도서관 정책 아이디어 해커톤 · <span class="rank">최우수상 · 1위</span></p>
+      <p class="sub">미래도서관 정책 아이디어 해커톤 · <span class="rank">최우수상 1위</span></p>
       <p class="desc">생성형 AI 대량출판으로 흔들리는 납본제도에 대해, AI 판별이나 창작성 심사 없이 보상 방식만 재설계하는 안을 제시. 납본 보상금을 현금에서 출판 생태계 전용 바우처로 전환해 대량출판의 경제적 유인을 조정하고, 가맹 체계와 3단계 시행안까지 설계.</p>
       <p class="role-note"><b>2인 팀</b> · 문제 정의 · 제도 설계 · 제안서 작성 (공동)</p>
       <div class="stack">
@@ -400,7 +414,7 @@ section + section { padding-top: 0.4rem; }
     <span class="when">2025.11</span>
     <div>
       <p class="ttl">부산 미분양 원인 분석</p>
-      <p class="sub">지산학 산업수학 데이터분석 경진대회 · <span class="rank">최우수상 · 2위</span></p>
+      <p class="sub">지산학 산업수학 데이터분석 경진대회 · <span class="rank">최우수상 2위</span></p>
       <p class="desc">부산 지역 미분양의 원인 구조를 패널 이중 고정효과와 분위수 회귀로 추정. 단위근·Hausman 검정으로 모형 선택 근거를 확보하고, 분위수별로 원인이 달라지는 구간을 해석.</p>
       <p class="role-note"><b>4인 팀</b> · 분석 설계 · 모형 선택 · 결과 해석</p>
       <div class="stack">
@@ -423,9 +437,9 @@ section + section { padding-top: 0.4rem; }
   </div>
 
   <div class="row">
-    <span class="when">2026.03~06</span>
+    <span class="when">2026.03~</span>
     <div>
-      <p class="ttl">키퍼 · 정보보안 동아리</p>
+      <p class="ttl">키퍼 정보보안 동아리</p>
       <p class="sub">정기 세미나 및 CS · 웹 · 보안을 넓게 다루는 스터디 활동</p>
     </div>
   </div>
@@ -433,7 +447,7 @@ section + section { padding-top: 0.4rem; }
   <div class="row">
     <span class="when">2025.08~</span>
     <div>
-      <p class="ttl">IBA · 데이터분석 동아리</p>
+      <p class="ttl">IBA 데이터분석 동아리</p>
       <p class="sub">데이터분석 · 머신러닝 교육 이수, ML 프로젝트 2건 수행 (신용위험 분류 · 중고차 가격 회귀)<br>학술부 운영진으로 신입 교육 · 내부 대회 운영 담당, AI 논문 스터디 팀장<br>동아리 디스코드 채널 개설, GitHub 트렌딩 일일 브리핑 봇 제작 · 운영</p>
     </div>
   </div>
@@ -441,7 +455,7 @@ section + section { padding-top: 0.4rem; }
   <div class="row">
     <span class="when">2025.04~12</span>
     <div>
-      <p class="ttl">CJ 리모트인턴십 · 대외활동</p>
+      <p class="ttl">CJ 리모트인턴십 대외활동</p>
       <p class="sub">데이터분석 · 기획 특강 수강 후 세션2 진출, 지역문제 팀 프로젝트로 부산 악취 원인 분석<br>과정 내 덱스톤에서 올리브영 매출 · 프로모션 데이터로 권역별 주력 상품군 차이 확인, 전국 단일 프로모션의 한계를 지적하고 다중회귀로 권역별 매출 요인 검증</p>
     </div>
   </div>
@@ -449,7 +463,7 @@ section + section { padding-top: 0.4rem; }
   <div class="row">
     <span class="when">2024.03~08</span>
     <div>
-      <p class="ttl">코드코치 · 코딩 교육봉사 동아리</p>
+      <p class="ttl">코드코치 코딩 교육봉사 동아리</p>
       <p class="sub">대학생 멘토로 초 · 중학생 대상 마이크로비트 블록코딩 교육 진행</p>
     </div>
   </div>
@@ -462,21 +476,23 @@ section + section { padding-top: 0.4rem; }
 
   <div class="tracks">
     <div class="track">
-      <h3>개발 · AI 응용</h3>
+      <h3>개발</h3>
       <dl>
         <dt>언어</dt>
         <dd>Python, TypeScript, C, C++, Java</dd>
         <dt>백엔드</dt>
-        <dd>FastAPI, NestJS, Prisma, PostgreSQL</dd>
-        <dt>프론트 · 배포</dt>
-        <dd>React, Next.js, Docker, GitHub Actions</dd>
-        <dt>AI 응용</dt>
-        <dd>RAG, OCR, 임베딩, 벡터DB, LLM API</dd>
+        <dd>FastAPI, NestJS, Prisma, PostgreSQL, Docker</dd>
+        <dt>프론트엔드</dt>
+        <dd>React, Next.js</dd>
+        <dt>AI 파이프라인</dt>
+        <dd>OCR, 임베딩, 벡터DB, LLM API</dd>
+        <dt>스마트컨트랙트</dt>
+        <dd>Solidity, Foundry</dd>
       </dl>
     </div>
 
     <div class="track">
-      <h3>데이터 · 분석</h3>
+      <h3>데이터 분석</h3>
       <dl>
         <dt>계량 · 통계</dt>
         <dd>다중회귀분석, 분위수 회귀분석, 패널 고정효과 모형, 이벤트 스터디</dd>
@@ -490,14 +506,14 @@ section + section { padding-top: 0.4rem; }
 
 </section>
 
-<!-- ========== 자격증 · 시험 ========== -->
+<!-- ========== 자격증 시험 ========== -->
 <section id="certs">
-  <h2 class="sec-title">자격증 · 시험</h2>
+  <h2 class="sec-title">자격증 시험</h2>
 
   <div class="row">
     <span class="when">2026.05</span>
     <div>
-      <p class="ttl">PCCP <span class="rank">Lv.3 · 622점</span></p>
+      <p class="ttl">PCCP <span class="rank">Lv.3 622점</span></p>
       <p class="sub">프로그래머스 코딩 전문 역량 인증 시험 · C++</p>
     </div>
   </div>
