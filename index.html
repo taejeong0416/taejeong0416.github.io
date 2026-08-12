@@ -451,7 +451,7 @@ if (window.self !== window.top) {
         <span>React · Vite</span><span>NestJS</span><span>PostGIS</span><span>Prisma</span><span>Gemini API</span><span>Naver Maps</span>
       </div>
     </div>
-    <div class="shots" data-caps="표지|가상 매물 비교로 취향 학습|위치 기반 지도 탐색">
+    <div class="shots">
       <div class="stage">
         <div class="frame">
           <img src="assets/report-belive-1.jpg" alt="발표자료 표지" loading="lazy">
@@ -505,7 +505,7 @@ if (window.self !== window.top) {
         <span>Next.js · TS</span><span>Prisma</span><span>Supabase</span><span>Solidity · Foundry</span><span>OCR · Vision</span>
       </div>
     </div>
-    <div class="shots" data-caps="표지|공실 전환 운영 흐름|운영자 앱 MVP">
+    <div class="shots">
       <div class="stage">
         <div class="frame">
           <img src="assets/report-farmpi-1.jpg" alt="발표자료 표지" loading="lazy">
@@ -546,7 +546,7 @@ if (window.self !== window.top) {
         <span>정책 설계</span><span>제도 분석</span><span>생성형 AI 이슈</span>
       </div>
     </div>
-    <div class="shots" data-caps="표지|핵심 제안|바우처 운용 흐름">
+    <div class="shots">
       <div class="stage">
         <div class="frame">
           <img src="assets/report-nabbon-1.jpg" alt="제안서 표지" loading="lazy">
@@ -587,7 +587,7 @@ if (window.self !== window.top) {
         <span>Python</span><span>패널 FE</span><span>분위수 회귀</span><span>단위근 · Hausman</span>
       </div>
     </div>
-    <div class="shots" data-caps="표지|FE 회귀모형 설계|구·군별 리스크 수준">
+    <div class="shots">
       <div class="stage">
         <div class="frame">
           <img src="assets/report-misbunyang-1.jpg" alt="제출 보고서 표지" loading="lazy">
@@ -789,7 +789,6 @@ addEventListener('keydown', e => {
 document.querySelectorAll('.shots').forEach(shots => {
   const frame = shots.querySelector('.frame');
   const imgs = [...frame.querySelectorAll('img')];
-  const caps = shots.dataset.caps.split('|');
   const dots = shots.querySelector('.dots');
   const cap = shots.querySelector('.cap');
 
@@ -820,7 +819,7 @@ document.querySelectorAll('.shots').forEach(shots => {
   const sync = () => {
     const i = Math.round(frame.scrollLeft / frame.clientWidth);
     [...dots.children].forEach((b, n) => b.setAttribute('aria-current', n === i));
-    cap.textContent = `${i + 1} / ${imgs.length} · ${caps[i]}`;
+    cap.textContent = `${i + 1} / ${imgs.length}`;
   };
   frame.addEventListener('scroll', () => {
     clearTimeout(frame._t);
