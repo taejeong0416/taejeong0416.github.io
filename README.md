@@ -1,4 +1,4 @@
-# 포트폴리오
+# 이력서
 
 **https://taejeong0416.github.io**
 
