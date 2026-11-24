@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Pretendard, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif">
+  <rect width="1600" height="900" fill="#F3EFEA"/>
+  <text x="140" y="112" font-size="38" font-weight="700" fill="#202020">합성 이상 주입 평가 결과</text>
+  <rect x="140" y="146" width="22" height="22" fill="#8D9196"/>
+  <text x="174" y="165" font-size="24" fill="#3a3a3a">±30% 규칙 기반</text>
+  <rect x="400" y="146" width="22" height="22" fill="#5C7DCF"/>
+  <text x="434" y="165" font-size="24" fill="#3a3a3a">제안 방법</text>
+  <g stroke="#d6d0c8" stroke-width="2">
+    <line x1="230" y1="200" x2="1460" y2="200"/>
+    <line x1="230" y1="340" x2="1460" y2="340"/>
+    <line x1="230" y1="480" x2="1460" y2="480"/>
+    <line x1="230" y1="620" x2="1460" y2="620"/>
+  </g>
+  <line x1="230" y1="760" x2="1460" y2="760" stroke="#7a736b" stroke-width="2"/>
+  <g font-size="22" fill="#5f574f" text-anchor="end">
+    <text x="214" y="208">100%</text>
+    <text x="214" y="348">75%</text>
+    <text x="214" y="488">50%</text>
+    <text x="214" y="628">25%</text>
+    <text x="214" y="768">0%</text>
+  </g>
+  <rect x="380" y="681" width="150" height="79" fill="#8D9196"/>
+  <rect x="560" y="364.6" width="150" height="395.4" fill="#5C7DCF"/>
+  <rect x="980" y="312.6" width="150" height="447.4" fill="#8D9196"/>
+  <rect x="1160" y="402.2" width="150" height="357.8" fill="#5C7DCF"/>
+  <g font-size="36" font-weight="700" fill="#202020" text-anchor="middle">
+    <text x="455" y="664">14.1%</text>
+    <text x="635" y="348">70.6%</text>
+    <text x="1055" y="296">79.9%</text>
+    <text x="1235" y="386">63.9%</text>
+  </g>
+  <g font-size="28" fill="#202020" text-anchor="middle">
+    <text x="545" y="812">시간 패턴 이탈형 탐지율</text>
+    <text x="1145" y="812">Precision</text>
+  </g>
+</svg>
