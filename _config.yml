@@ -1,0 +1,22 @@
+# GitHub Pages(Jekyll) 설정
+title: Park Taejeong | Portfolio
+author: Park Taejeong
+url: https://taejeong0416.github.io
+lang: ko
+
+# 프로젝트 하나 = _projects/ 안의 마크다운 파일 하나. /projects/<파일이름>.html로 나간다
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name:output_ext
+
+defaults:
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+
+exclude:
+  - README.md
+  - cv_general.md
+  - 편집규칙.md
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,23 @@
+# 목록 페이지 Awards, Skills, About 구역 내용. 줄을 추가하면 페이지에 그대로 나간다.
+# 수상의 project에는 관련 프로젝트 파일 이름(_projects/<이름>.md)을 적는다. 그 프로젝트가 있으면 링크가 생긴다.
+awards:
+  - { when: "2026.09", name: 2026 블록체인&AI 해커톤, prize: 최우수상 2위, project: farmfi }
+  - { when: "2026.07", name: DIVE 2026 글로벌 데이터 해커톤, prize: 발제사상 2위, project: belive }
+  - { when: "2026.05", name: 하나 소셜벤처 아이디어 경진대회, prize: 최우수상 1위, project: farmfi }
+  - { when: "2026.03", name: 미래도서관 정책 아이디어 해커톤, prize: 최우수상 1위, project: nabbon }
+  - { when: "2025.12", name: CJ 리모트인턴십 덱스톤, prize: 최우수상 1위 }
+  - { when: "2025.11", name: 지산학 산업수학 데이터분석 경진대회, prize: 최우수상 2위, project: busan-unsold }
+skills:
+  - { label: 언어, text: "Python, TypeScript, C++" }
+  - { label: 데이터와 ML, text: "패널 회귀, 분위수 회귀, GMM, Isolation Forest, Autoencoder, SHAP" }
+  - { label: 백엔드, text: "FastAPI, NestJS, Next.js, Prisma, PostgreSQL, Supabase" }
+  - { label: AI 응용, text: "RAG, Qdrant, OCR, LLM API" }
+  - { label: 도구, text: "Git, GitHub Actions, Docker" }
+education:
+  - { when: "2024.03-", text: "부산대학교 정보컴퓨터공학부 인공지능전공, 2028.02 졸업 예정" }
+certs:
+  - { when: "2026.08", text: ADsP 데이터분석 준전문가 }
+  - { when: "2026.05", text: PCCP Lv.3 622점 }
+contact:
+  email: tj041600@naver.com
+  github: https://github.com/taejeong0416

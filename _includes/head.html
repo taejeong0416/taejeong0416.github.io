@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if page.collection == "projects" %}
+{%- capture page_title %}{{ page.title }} | {{ site.author }}{% endcapture %}
+{%- else %}
+{%- assign page_title = site.title %}
+{%- endif %}
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page.description }}">
+<!-- 링크 공유 미리보기. assets/og.png는 목록 페이지 첫 화면을 1200x630으로 캡처한 것이다. -->
+<meta property="og:type" content="{% if page.collection == 'projects' %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page.og_description | default: page.description }}">
+<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23252525'/><g fill='none' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'><path d='M22 20L12 32L22 44M42 20L52 32L42 44' stroke='%23a9bdf5'/><path d='M36 16L28 48' stroke='%23f7f6f3'/></g></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css">

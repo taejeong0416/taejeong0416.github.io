@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+{% include head.html %}
+<link rel="stylesheet" href="{{ '/assets/detail.css' | relative_url }}">
+</head>
+<body>
+{%- assign projects = site.projects | sort: "order" %}
+{%- for p in projects %}{% if p.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{%- assign num = idx | plus: 1 %}
+{%- capture no %}{% if num < 10 %}0{% endif %}{{ num }}{% endcapture %}
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="{{ '/' | relative_url }}">박태정</a>
+    <span class="crumb">PROJECT ARCHIVE / No. {{ no }}</span>
+    <a class="back" href="{{ '/' | relative_url }}#{{ page.slug }}">← 목록으로</a>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main class="wrap">
+  <section class="head">
+    <div class="reveal">
+      <div class="num">No. {{ no }}</div>
+      <h1>{{ page.title }}</h1>
+      <p class="lede">{{ page.lede }}</p>
+    </div>
+    <dl class="meta reveal">
+      {%- for m in page.meta %}
+      <dt>{{ m.label }}</dt><dd>{{ m.value }}</dd>
+      {%- endfor %}
+      {%- if page.links %}
+      <dt>링크</dt><dd>{% for l in page.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% if l.note %} {{ l.note }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</dd>
+      {%- endif %}
+    </dl>
+  </section>
+
+  {%- assign shown = page.images.size %}{% if shown > 3 %}{% assign shown = 3 %}{% endif %}
+  <div class="hero-img reveal" data-count="{{ page.images.size }}">
+    <div class="collage" id="stack" data-count="{{ shown }}" tabindex="0" aria-label="프로젝트 이미지, 좌우 화살표로 넘긴다">
+      {%- for im in page.images %}
+      <figure class="photo" data-cap="{{ im.cap }}"><div class="img"><img src="{{ '/assets/' | append: im.file | relative_url }}" alt="{{ im.alt | default: im.cap }}"></div><figcaption class="cap">{{ im.cap }}</figcaption></figure>
+      {%- endfor %}
+    </div>
+    <div class="gallery-info">
+      <div class="count"><b id="cur">01</b> / <span id="total">01</span></div>
+      <p class="now" id="now">{{ page.images[0].cap }}</p>
+      <div class="btns"><button id="prev" aria-label="이전 이미지">←</button><button id="next" aria-label="다음 이미지">→</button></div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+  </div>
+
+  {%- comment %} 본문의 ## 제목마다 섹션 하나를 만든다 {% endcomment %}
+  {%- assign chunks = content | split: "<h2" %}
+  {%- for chunk in chunks offset: 1 %}
+  {%- assign hb = chunk | split: "</h2>" %}
+  {%- assign attr = hb[0] | split: '">' | first %}
+  {%- assign heading = hb[0] | remove_first: attr | remove_first: '">' %}
+  {%- capture n %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}{% endcapture %}
+  <section class="sec">
+    <div class="side"><div class="n">{{ n }}</div><h2>{{ heading }}</h2></div>
+    <div class="body reveal">{{ hb[1] }}</div>
+  </section>
+  {%- endfor %}
+
+  <nav class="pager">
+    {%- if idx > 0 %}
+    {%- assign pi = idx | minus: 1 %}
+    {%- assign prev = projects[pi] %}
+    {%- capture pn %}{% if idx < 10 %}0{% endif %}{{ idx }}{% endcapture %}
+    <a href="{{ prev.url | relative_url }}"><small>← 이전 프로젝트</small><b>No. {{ pn }} {{ prev.title }}</b></a>
+    {%- else %}
+    <a href="{{ '/' | relative_url }}"><small>← 목록</small><b>전체 프로젝트</b></a>
+    {%- endif %}
+    {%- assign last = projects.size | minus: 1 %}
+    {%- if idx < last %}
+    {%- assign next = projects[num] %}
+    {%- assign nn_i = num | plus: 1 %}
+    {%- capture nn %}{% if nn_i < 10 %}0{% endif %}{{ nn_i }}{% endcapture %}
+    <a href="{{ next.url | relative_url }}"><small>다음 프로젝트 →</small><b>No. {{ nn }} {{ next.title }}</b></a>
+    {%- else %}
+    <a href="{{ '/' | relative_url }}"><small>목록 →</small><b>전체 프로젝트</b></a>
+    {%- endif %}
+  </nav>
+</main>
+
+<script src="{{ '/assets/detail.js' | relative_url }}"></script>
+</body>
+</html>
