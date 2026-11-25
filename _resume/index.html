@@ -48,8 +48,8 @@ body {
 }
 
 /* 제목은 줄 길이를 고르게, 본문은 마지막 줄에 한 단어만 남지 않게 */
-.ttl, .track h3 { text-wrap: balance; }
-.sub, .desc, .role-note, .track dd { text-wrap: pretty; }
+.ttl { text-wrap: balance; }
+.sub, .desc, .role-note { text-wrap: pretty; }
 a { color: inherit; text-decoration: none; }
 
 /* ===== 좌측 목차 ===== */
@@ -255,20 +255,6 @@ section + section { padding-top: 0.4rem; }
   padding: 0.1rem 0.5rem;
 }
 
-/* 역량 2트랙 */
-.tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6rem; }
-.track h3 {
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--line-mid);
-}
-.track dl { margin-top: 1rem; }
-.track dt { font-size: 0.76rem; color: var(--ink-soft); margin-top: 0.9rem; }
-.track dt:first-child { margin-top: 0; }
-.track dd { font-size: 0.85rem; color: var(--ink); margin-top: 0.15rem; }
-
-
 /* 연락처 */
 .contact { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; }
 .contact div { display: grid; grid-template-columns: 78px 1fr; gap: 1rem; }
@@ -307,7 +293,6 @@ section + section { padding-top: 0.4rem; }
   html:not(.embed) .toc a { border-left: none; padding-left: 0; margin-left: 0; }
   html:not(.embed) .toc a.on { border-left: none; }
   html:not(.embed) main { margin-left: 0; padding: 2.4rem 1.6rem 4rem; }
-  html:not(.embed) .tracks { grid-template-columns: 1fr; gap: 2rem; }
   html:not(.embed) .row { grid-template-columns: 1fr; gap: 0.2rem; }
   html:not(.embed) .shots { max-width: none; margin-left: 0; }
   html:not(.embed) .when { padding-top: 0; }
@@ -337,8 +322,7 @@ section + section { padding-top: 0.4rem; }
   .sec-title { margin-bottom: 1.1rem; break-after: avoid; }
   .row { padding: 0.75rem 0; }
   .proj { padding: 1.1rem 0; }
-  .track dt { margin-top: 0.6rem; }
-  .row, .proj, .track, .contact div { break-inside: avoid; }
+  .row, .proj, .contact div { break-inside: avoid; }
   .shots, .lightbox { display: none; }
   .desc, .sub { orphans: 2; widows: 2; }
 
@@ -655,34 +639,21 @@ if (window.self !== window.top) {
 <section id="skills">
   <h2 class="sec-title">역량</h2>
 
-  <div class="tracks">
-    <div class="track">
-      <h3>개발</h3>
-      <dl>
-        <dt>언어</dt>
-        <dd>Python, TypeScript, C, C++, Java</dd>
-        <dt>백엔드</dt>
-        <dd>FastAPI, NestJS, Prisma, PostgreSQL, Docker</dd>
-        <dt>프론트엔드</dt>
-        <dd>React, Next.js, React Native(Expo)</dd>
-        <dt>AI 파이프라인</dt>
-        <dd>OCR, 임베딩, 벡터DB, LLM API</dd>
-        <dt>스마트컨트랙트</dt>
-        <dd>Solidity, Foundry</dd>
-      </dl>
-    </div>
-
-    <div class="track">
-      <h3>데이터 분석</h3>
-      <dl>
-        <dt>계량 · 통계</dt>
-        <dd>다중회귀분석, 분위수 회귀분석, 패널 고정효과 모형, 이벤트 스터디</dd>
-        <dt>머신러닝</dt>
-        <dd>비지도 이상탐지, 추천 · 취향학습, 분류 · 회귀</dd>
-        <dt>분석 도구</dt>
-        <dd>pandas, scikit-learn, PyTorch, PostGIS</dd>
-      </dl>
-    </div>
+  <div class="row">
+    <span class="when">언어</span>
+    <p>Python, TypeScript, C++</p>
+  </div>
+  <div class="row">
+    <span class="when">데이터 분석</span>
+    <p>pandas, scikit-learn, PyTorch</p>
+  </div>
+  <div class="row">
+    <span class="when">AI 서비스</span>
+    <p>LLM API, RAG, Qdrant</p>
+  </div>
+  <div class="row">
+    <span class="when">서비스 개발</span>
+    <p>FastAPI, NestJS, Next.js, React, PostgreSQL, Docker</p>
   </div>
 
 </section>
