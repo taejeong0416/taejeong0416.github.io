@@ -9,12 +9,11 @@ awards:
   - { when: "2025.11", name: 지산학 산업수학 데이터분석 경진대회, prize: 최우수상 2위, project: busan-unsold }
 skills:
   - { label: 언어, text: "Python, TypeScript, C++" }
-  - { label: 데이터와 ML, text: "패널 회귀, 분위수 회귀, GMM, Isolation Forest, Autoencoder, SHAP" }
-  - { label: 백엔드, text: "FastAPI, NestJS, Next.js, Prisma, PostgreSQL, Supabase" }
-  - { label: AI 응용, text: "RAG, Qdrant, OCR, LLM API" }
-  - { label: 도구, text: "Git, GitHub Actions, Docker" }
+  - { label: 데이터 분석, text: "pandas, scikit-learn, PyTorch" }
+  - { label: AI 서비스, text: "LLM API, RAG, Qdrant" }
+  - { label: 서비스 개발, text: "FastAPI, NestJS, Next.js, React, PostgreSQL, Docker" }
 education:
-  - { when: "2024.03-", text: "부산대학교 정보컴퓨터공학부 인공지능전공, 2028.02 졸업 예정" }
+  - { when: "2024.03-", text: "부산대학교 정보컴퓨터공학부 인공지능전공 3학년 재학" }
 certs:
   - { when: "2026.08", text: ADsP 데이터분석 준전문가 }
   - { when: "2026.05", text: PCCP Lv.3 622점 }
